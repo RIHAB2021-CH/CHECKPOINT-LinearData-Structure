@@ -1,0 +1,48 @@
+ALGORITHM Sum-Sum_SIMILAR
+VAR
+ set1,set2:ARRAY_OF INTEGER[50];
+ i,j,count:INTEGER;
+ sum:integer:=0;
+   // declaring hash table
+   htab : HASH_TABLE<INTEGER,INTEGER>;
+   // HASH_TABLE<Key_type,Value_type>
+  
+BEGIN
+ Write("give the length of the first set") Read(n1);//Read set1.length
+ Write("give the length of the second set") Read(n2);//Read set2.length
+ /*inputs*/
+FOR i FROM 0 TO n1-1 STEP 1  DO
+    Read(set[i]);
+END_FOR
+FOR j FROM 0 TO n2-1 STEP 1  DO
+    Read (set2[j]);
+END_FOR
+/*Hash table*/
+   htab : HASH_TABLE<INTEGER,INTEGER>;
+   count:=1;
+   FOR i FROM 0 TO n1-1 STEP 1  DO
+       htab.insert(set1[i],1);
+
+   END_FOR
+FOR i FROM 0 TO n2-1 STEP 1  DO
+    IF (htab.lookup(set2[i]=true)) THEN
+        count:=htab.get(set2[i]);
+        htab.insert(set2[i],count+1);
+    ELSE
+        htab.insert(set2[i],1);
+    END_IF
+END_FOR
+/*CALCUL SUM*/
+FOR i FROM 0 TO n1 -1 STEP 1  DO
+       IF (htab.get(set1[i]) <> 1) THEN //condition count<>1 add set1 elt
+           Sum:= sum+set1[i];
+       END_IF
+END_FOR
+FOR j FROM 0 TO n2 -1 STEP 1  DO
+       IF (htab.get(set2[j]) <> 1) THEN //condition count<>1 add set2 elt
+           Sum:= sum+set2[j];
+       END_IF
+END_FOR
+/*WRITE SUM*/
+   Write("The sum of all similar elements from the set=",sum)
+END

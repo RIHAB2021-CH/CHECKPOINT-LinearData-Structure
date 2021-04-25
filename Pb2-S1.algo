@@ -1,0 +1,38 @@
+ALGORITHM Sum_SIMILAR
+VAR 
+ set1,set2:ARRAY_OF INTEGER[50];
+ tab:ARRAY_OF INTEGER[100];
+ count,dim,n1;n2,i,j,k,l:INTEGER;
+ sum:INTEGER:=0;
+BEGIN
+
+ /* Input*/
+ Write("give the length of the first set") Read(n1);//Read set1.length
+ Write("give the length of the second set") Read(n2);//Read set2.length
+ dim:=n1+n2; //tab dimension
+FOR i FROM 0 TO n1-1 STEP 1  DO
+    Read(set[i]);
+    tab[i]:=set[i];//put  both sets in the same array
+END_FOR
+FOR j FROM 0 TO n2-1 STEP 1  DO
+    Read (set2[j]);
+END_FOR
+FOR k FROM n1 TO dim-1 STEP 1  DO
+    tab[k]:=set2[k]//put both sets in the same array
+END_FOR
+
+/* find the sum of all SIMILAR elements from the set*/
+    FOR k FROM 0 TO dim-1 STEP 1  DO
+        count:=0;
+        FOR l FROM 0 TO dim-1 STEP 1  DO
+            IF (tab[k]=tab[l] ) THEN
+                count++             //count occurence
+            END_IF 
+        END_FOR
+        IF (count<>1) THEN
+            sum=sum+tab[k]          //Calcul SUM OF SIMILAR ELEMENTS
+        END_IF
+    END_FOR
+/*return result*/
+    Write("The sum of all similar elements from the set=",sum)
+END
